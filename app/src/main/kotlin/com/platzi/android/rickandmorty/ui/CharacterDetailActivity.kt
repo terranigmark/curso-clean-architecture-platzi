@@ -44,6 +44,15 @@ class CharacterDetailActivity: AppCompatActivity() {
         GetEpisodeFromCharacterUseCase(episodeRequest)
     }
 
+    //TODO Paso 12: Crear la variable getFavoriteCharacterStatusUseCase de tipo GetFavoriteCharacterStatusUseCase usando la función lazy
+    //TODO Paso 12.1: Para como parámetro characterDao
+
+    //TODO Paso 13: Crear la variable getFavoriteCharacterStatusUseCase de tipo GetFavoriteCharacterStatusUseCase usando la función lazy
+    //TODO Paso 13.1: Para como parámetro characterDao
+
+    //TODO Paso 14: Eliminar la variable "characterDao"
+    //TODO Paso 15: Agregar el caso de uso "getFavoriteCharacterStatusUseCase"
+    //TODO Paso 16: Agregar el caso de uso "updateFavoriteCharacterStatusUseCase"
     private val characterDetailViewModel: CharacterDetailViewModel by lazy {
         getViewModel {
             CharacterDetailViewModel(
