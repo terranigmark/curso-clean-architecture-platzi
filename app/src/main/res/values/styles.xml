@@ -1,0 +1,75 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CharacterGridItemImage">
+        <item name="android:layout_height">@dimen/character_list_item_size</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="CharacterListItemName">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@color/colorTransparentAccent</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="FavoriteListItemName" parent="CharacterListItemName">
+        <item name="android:background">@color/colorTransparentFavorite</item>
+    </style>
+
+    <style name="CharacterDetailSectionTitle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CharacterDetailSectionName" parent="CharacterDetailSectionTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="CharacterDetailHeaderSectionTitle" parent="CharacterDetailSectionTitle">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="CharacterDetailSectionBody">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="CharacterDetailHeaderSectionBody" parent="CharacterDetailSectionBody">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="CharacterDetailLocationSectionCard">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="CharacterDetailLocationSectionBody" parent="CharacterDetailSectionBody">
+        <item name="android:maxLines">3</item>
+    </style>
+
+</resources>

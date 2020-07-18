@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.platzi.android.rickandmorty"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/java'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    //Kotlin
+    implementation kotlinLib
+
+    //KTX
+    implementation ktxLib
+
+    //Glide
+    implementation glideLib
+    annotationProcessor glideCompiler
+
+    //Gson
+    implementation gsonLib
+
+    //Material
+    implementation materialLib
+
+    //Retrofit
+    implementation okHttpInterceptorLib
+    implementation retrofitRxJavaLib
+    implementation retrofitGsonLib
+
+    //Room
+    api roomLib
+    kapt roomCompiler
+    implementation roomRxJavaLib
+
+    //RxJava
+    implementation rxAndroidLib
+    implementation rxJavaLib
+
+    // View
+    implementation appCompatLib
+    implementation cardViewLib
+    implementation constraintLayoutLib
+    implementation recyclerViewLib
+    implementation swipeRefreshLayoutLib
+    implementation viewPagerLib
+}

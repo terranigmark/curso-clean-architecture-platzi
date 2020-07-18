@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="character_detail_location_height">108dp</dimen>
+    <dimen name="character_list_item_size">160dp</dimen>
+    <dimen name="list_item_padding">12dp</dimen>
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">RickAndMortyPlatzi</string>
+
+    <!-- Content Descriptions -->
+    <string name="content_description_character_detail_image">Character poster item</string>
+    <string name="content_description_character_image">Character poster item</string>
+    <string name="content_description_character_image_favorite_icon">Character poster favorite icon</string>
+
+    <!-- Errors -->
+    <string name="error_no_available_data">No available data for the moment.</string>
+    <string name="error_no_character_data">There is no data related to this character.</string>
+
+    <!-- Menus -->
+    <string name="menu_navigation_list">List</string>
+    <string name="menu_navigation_favorites">Favorites</string>
+
+    <!-- Sections -->
+    <string name="section_gender">Gender</string>
+    <string name="section_list_of_episodes">List of episodes</string>
+    <string name="section_location">Location</string>
+    <string name="section_origin">Origin</string>
+    <string name="section_species">Species</string>
+    <string name="section_status">Status</string>
+
+    <!-- Titles -->
+    <string name="title_character_detail_activity">Character Detail</string>
+</resources>
