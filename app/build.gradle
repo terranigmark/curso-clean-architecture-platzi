@@ -45,6 +45,7 @@ androidExtensions {
 
 dependencies {
     //Project
+    implementation project(":data")
     implementation project(":domain")
 
     //Kotlin
