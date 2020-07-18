@@ -20,6 +20,7 @@ import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.Favori
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowCharacterList
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowEmptyListMessage
 import com.platzi.android.rickandmorty.presentation.utils.Event
+import com.platzi.android.rickandmorty.usecases.GetAllFavoriteCharactersUseCase
 import com.platzi.android.rickandmorty.utils.getViewModel
 import com.platzi.android.rickandmorty.utils.setItemDecorationSpacing
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
@@ -35,8 +36,12 @@ class FavoriteListFragment : Fragment() {
         CharacterDatabase.getDatabase(activity!!.applicationContext).characterDao()
     }
 
+    private val getAllFavoriteCharactersUseCase: GetAllFavoriteCharactersUseCase by lazy {
+        GetAllFavoriteCharactersUseCase(characterDao)
+    }
+
     private val favoriteListViewModel: FavoriteListViewModel by lazy {
-        getViewModel { FavoriteListViewModel(characterDao) }
+        getViewModel { FavoriteListViewModel(getAllFavoriteCharactersUseCase) }
     }
 
     //endregion

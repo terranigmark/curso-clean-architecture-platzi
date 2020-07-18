@@ -3,13 +3,11 @@ package com.platzi.android.rickandmorty.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.platzi.android.rickandmorty.api.*
+import com.platzi.android.rickandmorty.api.CharacterServer
 import com.platzi.android.rickandmorty.presentation.CharacterListViewModel.CharacterListNavigation.*
 import com.platzi.android.rickandmorty.presentation.utils.Event
 import com.platzi.android.rickandmorty.usecases.GetAllCharactersUseCase
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class CharacterListViewModel(
     private val getAllCharactersUseCase: GetAllCharactersUseCase

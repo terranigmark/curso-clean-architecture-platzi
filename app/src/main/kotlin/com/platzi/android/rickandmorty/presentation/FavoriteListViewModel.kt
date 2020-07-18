@@ -4,16 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.platzi.android.rickandmorty.database.CharacterDao
 import com.platzi.android.rickandmorty.database.CharacterEntity
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowCharacterList
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowEmptyListMessage
 import com.platzi.android.rickandmorty.presentation.utils.Event
+import com.platzi.android.rickandmorty.usecases.GetAllFavoriteCharactersUseCase
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class FavoriteListViewModel (
-    private val characterDao: CharacterDao
+    private val getAllFavoriteCharactersUseCase: GetAllFavoriteCharactersUseCase
 ) : ViewModel(){
 
     //region Fields
@@ -23,15 +22,8 @@ class FavoriteListViewModel (
     private val _events = MutableLiveData<Event<FavoriteListNavigation>>()
     val events: LiveData<Event<FavoriteListNavigation>> get() = _events
 
-    private val _favoriteCharacterList: LiveData<List<CharacterEntity>>
-        get() = LiveDataReactiveStreams.fromPublisher(
-            characterDao
-                .getAllFavoriteCharacters()
-                .onErrorReturn { emptyList() }
-                .subscribeOn(Schedulers.io())
-        )
     val favoriteCharacterList: LiveData<List<CharacterEntity>>
-        get() = _favoriteCharacterList
+        get() = LiveDataReactiveStreams.fromPublisher(getAllFavoriteCharactersUseCase.invoke())
 
     //endregion
 
