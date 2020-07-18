@@ -110,6 +110,7 @@ class CharacterDetailViewModel(
 
     sealed class CharacterDetailNavigation {
         data class ShowEpisodeError(val error: Throwable) : CharacterDetailNavigation()
+        //TODO Paso 11: Reemplazar tipo de episodio
         data class ShowEpisodeList(val episodeList: List<EpisodeServer>) : CharacterDetailNavigation()
         object CloseActivity : CharacterDetailNavigation()
         object HideEpisodeListLoading : CharacterDetailNavigation()

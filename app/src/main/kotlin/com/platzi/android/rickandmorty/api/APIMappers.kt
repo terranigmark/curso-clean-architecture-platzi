@@ -29,3 +29,5 @@ fun LocationServer.toLocationDomain() = Location(
     name,
     url
 )
+
+//TODO Paso 8: Crear mapper para cambiar de episodio del servidor a episodio de dominio

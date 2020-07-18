@@ -21,3 +21,7 @@ data class Origin(
     val name: String,
     val url: String
 )
+
+//TODO Paso 1: Crear entidad de episodio
+//TODO Paso 1.1: Agregar como parámetro "id" de tipo Int
+//TODO Paso 1.2: Agregar como parámetro "name" de tipo String

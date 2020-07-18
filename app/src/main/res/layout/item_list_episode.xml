@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <!-- TODO Paso 2: Reemplazar tipo de episodio -->
         <variable
             name="episode"
             type="com.platzi.android.rickandmorty.api.EpisodeServer" />

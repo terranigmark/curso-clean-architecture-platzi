@@ -12,6 +12,7 @@ class GetEpisodeFromCharacterUseCase(
     private val episodeRequest: EpisodeRequest
 ) {
 
+    //TODO Paso 9: Reemplazar tipo de episodio
     fun invoke(episodeUrlList: List<String>): Single<List<EpisodeServer>> {
         return Observable.fromIterable(episodeUrlList)
             .flatMap { episode: String ->
@@ -19,6 +20,7 @@ class GetEpisodeFromCharacterUseCase(
                 episodeRequest
                     .getService<EpisodeService>()
                     .getEpisode()
+                    //TODO Paso 10: Implementar función map para cambiar de episodio de servidor a episodio de dominio
                     .toObservable()
             }
             .toList()
