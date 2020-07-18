@@ -13,8 +13,8 @@ import com.platzi.android.rickandmorty.R
 import com.platzi.android.rickandmorty.adapters.FavoriteListAdapter
 import com.platzi.android.rickandmorty.database.CharacterDao
 import com.platzi.android.rickandmorty.database.CharacterDatabase
-import com.platzi.android.rickandmorty.database.CharacterEntity
 import com.platzi.android.rickandmorty.databinding.FragmentFavoriteListBinding
+import com.platzi.android.rickandmorty.domain.Character
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowCharacterList
@@ -113,7 +113,7 @@ class FavoriteListFragment : Fragment() {
     //region Inner Classes & Interfaces
 
     interface OnFavoriteListFragmentListener {
-        fun openCharacterDetail(character: CharacterEntity)
+        fun openCharacterDetail(character: Character)
     }
 
     //endregion

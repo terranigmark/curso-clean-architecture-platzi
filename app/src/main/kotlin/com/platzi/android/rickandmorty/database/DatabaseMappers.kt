@@ -1,27 +1,51 @@
 package com.platzi.android.rickandmorty.database
 
-import com.platzi.android.rickandmorty.api.CharacterServer
-import com.platzi.android.rickandmorty.api.LocationServer
-import com.platzi.android.rickandmorty.api.OriginServer
+import com.platzi.android.rickandmorty.domain.Character
+import com.platzi.android.rickandmorty.domain.Location
+import com.platzi.android.rickandmorty.domain.Origin
 
-fun CharacterEntity.toCharacterServer() = CharacterServer(
+fun List<CharacterEntity>.toCharacterDomainList() = map(CharacterEntity::toCharacterDomain)
+
+fun CharacterEntity.toCharacterDomain() = Character(
     id,
     name,
     image,
     gender,
     species,
     status,
-    origin.toOriginServer(),
-    location.toLocationServer(),
+    origin.toOriginDomain(),
+    location.toLocationDomain(),
     episodeList
 )
 
-fun OriginEntity.toOriginServer() = OriginServer(
+fun OriginEntity.toOriginDomain() = Origin(
     originName,
     originUrl
 )
 
-fun LocationEntity.toLocationServer() = LocationServer(
+fun LocationEntity.toLocationDomain() = Location(
     locationName,
     locationUrl
+)
+
+fun Character.toCharacterEntity() = CharacterEntity(
+    id,
+    name,
+    image,
+    gender,
+    species,
+    status,
+    origin.toOriginEntity(),
+    location.toLocationEntity(),
+    episodeList
+)
+
+fun Origin.toOriginEntity() = OriginEntity(
+    name,
+    url
+)
+
+fun Location.toLocationEntity() = LocationEntity(
+    name,
+    url
 )

@@ -3,10 +3,8 @@ package com.platzi.android.rickandmorty.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.platzi.android.rickandmorty.api.CharacterServer
 import com.platzi.android.rickandmorty.api.EpisodeServer
-import com.platzi.android.rickandmorty.api.toCharacterEntity
-import com.platzi.android.rickandmorty.database.CharacterEntity
+import com.platzi.android.rickandmorty.domain.Character
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation.*
 import com.platzi.android.rickandmorty.presentation.utils.Event
 import com.platzi.android.rickandmorty.usecases.GetEpisodeFromCharacterUseCase
@@ -17,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class CharacterDetailViewModel(
-    private val character: CharacterServer? = null,
+    private val character: Character? = null,
     private val getEpisodeFromCharacterUseCase: GetEpisodeFromCharacterUseCase,
     private val getFavoriteCharacterStatusUseCase: GetFavoriteCharacterStatusUseCase,
     private val updateFavoriteCharacterStatusUseCase: UpdateFavoriteCharacterStatusUseCase
@@ -27,8 +25,8 @@ class CharacterDetailViewModel(
 
     private val disposable = CompositeDisposable()
 
-    private val _characterValues = MutableLiveData<CharacterServer>()
-    val characterValues: LiveData<CharacterServer> get() = _characterValues
+    private val _characterValues = MutableLiveData<Character>()
+    val characterValues: LiveData<Character> get() = _characterValues
 
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> get() = _isFavorite
@@ -62,10 +60,9 @@ class CharacterDetailViewModel(
     }
 
     fun onUpdateFavoriteCharacterStatus() {
-        val characterEntity: CharacterEntity = character!!.toCharacterEntity()
         disposable.add(
             updateFavoriteCharacterStatusUseCase
-                .invoke(characterEntity)
+                .invoke(character!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe { isFavorite ->

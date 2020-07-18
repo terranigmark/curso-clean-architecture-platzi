@@ -9,11 +9,13 @@ import androidx.lifecycle.Observer
 import com.platzi.android.rickandmorty.R
 import com.platzi.android.rickandmorty.adapters.EpisodeListAdapter
 import com.platzi.android.rickandmorty.api.APIConstants.BASE_API_URL
-import com.platzi.android.rickandmorty.api.CharacterServer
 import com.platzi.android.rickandmorty.api.EpisodeRequest
 import com.platzi.android.rickandmorty.database.CharacterDao
 import com.platzi.android.rickandmorty.database.CharacterDatabase
 import com.platzi.android.rickandmorty.databinding.ActivityCharacterDetailBinding
+import com.platzi.android.rickandmorty.domain.Character
+import com.platzi.android.rickandmorty.parcelables.CharacterParcelable
+import com.platzi.android.rickandmorty.parcelables.toCharacterDomain
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation.*
@@ -57,7 +59,7 @@ class CharacterDetailActivity: AppCompatActivity() {
     private val characterDetailViewModel: CharacterDetailViewModel by lazy {
         getViewModel {
             CharacterDetailViewModel(
-                intent.getParcelableExtra(Constants.EXTRA_CHARACTER),
+                intent.getParcelableExtra<CharacterParcelable>(Constants.EXTRA_CHARACTER)?.toCharacterDomain(),
                 getEpisodeFromCharacterUseCase,
                 getFavoriteCharacterStatusUseCase,
                 updateFavoriteCharacterStatusUseCase
@@ -102,7 +104,7 @@ class CharacterDetailActivity: AppCompatActivity() {
 
     //region Private Methods
 
-    private fun loadCharacter(character: CharacterServer){
+    private fun loadCharacter(character: Character){
         binding.characterImage.bindCircularImageUrl(
             url = character.image,
             placeholder = R.drawable.ic_camera_alt_black,
