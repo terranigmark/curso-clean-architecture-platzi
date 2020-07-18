@@ -1,36 +1,45 @@
 package com.platzi.android.rickandmorty.presentation
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.platzi.android.rickandmorty.api.EpisodeServer
-import com.platzi.android.rickandmorty.api.EpisodeService
+import com.platzi.android.rickandmorty.api.*
+import com.platzi.android.rickandmorty.database.CharacterDao
 import com.platzi.android.rickandmorty.database.CharacterEntity
+import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation.*
+import com.platzi.android.rickandmorty.presentation.utils.Event
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-//TODO Paso 1: Pasar como parámetros "character" de tipo CharacterServer?, "characterDao" de tipo CharacterDao y "episodeRequest" de tipo EpisodeRequest
 class CharacterDetailViewModel(
-
+    private val character: CharacterServer? = null,
+    private val characterDao: CharacterDao,
+    private val episodeRequest: EpisodeRequest
 ) : ViewModel() {
 
     //region Fields
 
-    //TODO Paso 2: Declarar la variable "disposable" de tipo CompositeDisposable
+    private val disposable = CompositeDisposable()
 
-    //TODO Paso 3: Crear las variables de tipo MutableLiveData y LiveData para manejar los valores del personaje (tipo sugerido: CharacterServer)
+    private val _characterValues = MutableLiveData<CharacterServer>()
+    val characterValues: LiveData<CharacterServer> get() = _characterValues
 
-    //TODO Paso 4: Crear las variables de tipo MutableLiveData y LiveData para manejar el estado de favorito de un personaje (tipo sugerido: Boolean)
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> get() = _isFavorite
 
-    //TODO Paso 5: Crear las variables de tipo MutableLiveData y LiveData para manejar los eventos del view model (tipo sugerido: CharacterDetailNavigation)
+    private val _events = MutableLiveData<Event<CharacterDetailNavigation>>()
+    val events: LiveData<Event<CharacterDetailNavigation>> get() = _events
 
     //endregion
 
     //region Override Methods & Callbacks
 
-    //TODO Paso 6: Limpiar la variable "disposable" cuando el view model borre los recursos
     override fun onCleared() {
         super.onCleared()
+        disposable.clear()
     }
 
     //endregion
@@ -38,10 +47,15 @@ class CharacterDetailViewModel(
     //region Public Methods
 
     fun onCharacterValidation() {
-        //TODO Paso 7: Si el parámetro "character" es nulo, se debe disparar el evento de cerrar actividad y finalizar la ejecución de este método (Usar CharacterDetailNavigation)
-        //TODO Paso 8: Si el parámetro "character" no es nulo, se debe disparar el evento de cargar el personaje (Usar CharacterDetailNavigation)
-        //TODO Paso 9: Si el parámetro "character" no es nulo, se debe llamar al método "validateFavoriteCharacterStatus" el cual valida el estatus del personaje favorito
-        //TODO Paso 10: Si el parámetro "character" no es nulo, se debe llamar al método "requestShowEpisodeList" el cual hace una petición para devolver el listado de episodios del personaje
+        if (character == null) {
+            _events.value = Event(CloseActivity)
+            return
+        }
+
+        _characterValues.value = character
+
+        validateFavoriteCharacterStatus(character.id)
+        requestShowEpisodeList(character.episodeList)
     }
 
     fun onUpdateFavoriteCharacterStatus() {
@@ -60,7 +74,7 @@ class CharacterDetailViewModel(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe { isFavorite ->
-                    //TODO Paso 11: Disparar la variable de tipo MutableLiveData que se implementó en el Paso 3 con la variable "isFavorite"
+                    _isFavorite.value = isFavorite
                 }
         )
     }
@@ -79,7 +93,7 @@ class CharacterDetailViewModel(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe { isFavorite ->
-                    //TODO Paso 12: Disparar la variable de tipo MutableLiveData que se implementó en el Paso 3 con la variable "isFavorite"
+                    _isFavorite.value = isFavorite
                 }
         )
     }
@@ -98,16 +112,16 @@ class CharacterDetailViewModel(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe {
-                    //TODO Paso 13: Disparar el evento de mostrar el progreso de carga de la lista de episodio (Usar CharacterDetailNavigation)
+                    _events.value = Event(ShowEpisodeListLoading)
                 }
                 .subscribe(
                     { episodeList ->
-                        //TODO Paso 14: Disparar el evento de ocultar el progreso de carga de la lista de episodio (Usar CharacterDetailNavigation)
-                        //TODO Paso 15: Disparar el evento de mostrar la lista de episodio (Usar CharacterDetailNavigation)
+                        _events.value = Event(HideEpisodeListLoading)
+                        _events.value = Event(ShowEpisodeList(episodeList))
                     },
                     { error ->
-                        //TODO Paso 16: Disparar el evento de ocultar el progreso de carga de la lista de episodio (Usar CharacterDetailNavigation)
-                        //TODO Paso 17: Disparar el evento de mostrar error al cargar los episodios (Usar CharacterDetailNavigation)
+                        _events.value = Event(HideEpisodeListLoading)
+                        _events.value = Event(ShowEpisodeError(error))
                     })
         )
     }
