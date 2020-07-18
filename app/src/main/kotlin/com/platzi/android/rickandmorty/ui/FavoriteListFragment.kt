@@ -8,30 +8,36 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.platzi.android.rickandmorty.R
 import com.platzi.android.rickandmorty.adapters.FavoriteListAdapter
-import com.platzi.android.rickandmorty.api.APIConstants.BASE_API_URL
-import com.platzi.android.rickandmorty.api.CharacterRequest
 import com.platzi.android.rickandmorty.database.CharacterDao
 import com.platzi.android.rickandmorty.database.CharacterDatabase
 import com.platzi.android.rickandmorty.database.CharacterEntity
 import com.platzi.android.rickandmorty.databinding.FragmentFavoriteListBinding
+import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel
+import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation
+import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowCharacterList
+import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowEmptyListMessage
+import com.platzi.android.rickandmorty.presentation.utils.Event
+import com.platzi.android.rickandmorty.utils.getViewModel
 import com.platzi.android.rickandmorty.utils.setItemDecorationSpacing
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 
 class FavoriteListFragment : Fragment() {
 
     //region Fields
 
-    private val disposable = CompositeDisposable()
-
     private lateinit var favoriteListAdapter: FavoriteListAdapter
     private lateinit var listener: OnFavoriteListFragmentListener
-    private lateinit var characterRequest: CharacterRequest
-    private lateinit var characterDao: CharacterDao
+
+    private val characterDao: CharacterDao by lazy {
+        CharacterDatabase.getDatabase(activity!!.applicationContext).characterDao()
+    }
+
+    private val favoriteListViewModel: FavoriteListViewModel by lazy {
+        getViewModel { FavoriteListViewModel(characterDao) }
+    }
 
     //endregion
 
@@ -51,10 +57,6 @@ class FavoriteListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        characterRequest = CharacterRequest(BASE_API_URL)
-        characterDao = CharacterDatabase.getDatabase(activity!!.applicationContext).characterDao()
-
         return DataBindingUtil.inflate<FragmentFavoriteListBinding>(
             inflater,
             R.layout.fragment_favorite_list,
@@ -77,38 +79,29 @@ class FavoriteListFragment : Fragment() {
             setItemDecorationSpacing(resources.getDimension(R.dimen.list_item_padding))
             adapter = favoriteListAdapter
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-
-        disposable.add(
-            characterDao.getAllFavoriteCharacters()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ characterList ->
-                    if(characterList.isEmpty()) {
-                        tvEmptyListMessage.isVisible = true
-                        favoriteListAdapter.updateData(emptyList())
-                    } else {
-                        tvEmptyListMessage.isVisible = false
-                        favoriteListAdapter.updateData(characterList)
-                    }
-                },{
-                    tvEmptyListMessage.isVisible = true
-                    favoriteListAdapter.updateData(emptyList())
-                })
-        )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.clear()
+        favoriteListViewModel.favoriteCharacterList.observe(this, Observer(favoriteListViewModel::onFavoriteCharacterList))
+        favoriteListViewModel.events.observe(this, Observer(this::validateEvents))
     }
 
     //endregion
 
     //region Private Methods
+
+    private fun validateEvents(event: Event<FavoriteListNavigation>?) {
+        event?.getContentIfNotHandled()?.let { navigation ->
+            when (navigation) {
+                is ShowCharacterList -> navigation.run {
+                    tvEmptyListMessage.isVisible = false
+                    favoriteListAdapter.updateData(characterList)
+                }
+                ShowEmptyListMessage -> {
+                    tvEmptyListMessage.isVisible = true
+                    favoriteListAdapter.updateData(emptyList())
+                }
+            }
+        }
+    }
 
     //endregion
 
