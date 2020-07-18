@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.platzi.android.rickandmorty.api.*
 import com.platzi.android.rickandmorty.presentation.CharacterListViewModel.CharacterListNavigation.*
 import com.platzi.android.rickandmorty.presentation.utils.Event
+import com.platzi.android.rickandmorty.usecases.GetAllCharactersUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class CharacterListViewModel(
-    private val characterRequest: CharacterRequest
+    private val getAllCharactersUseCase: GetAllCharactersUseCase
 ): ViewModel() {
 
     //region Fields
@@ -58,12 +59,8 @@ class CharacterListViewModel(
 
     fun onGetAllCharacters(){
         disposable.add(
-            characterRequest
-                .getService<CharacterService>()
-                .getAllCharacters(currentPage)
-                .map(CharacterResponseServer::toCharacterServerList)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+            getAllCharactersUseCase
+                .invoke(currentPage)
                 .doOnSubscribe { showLoading() }
                 .subscribe({ characterList ->
                     if (characterList.size < PAGE_SIZE) {
