@@ -3,20 +3,17 @@ package com.platzi.android.rickandmorty.adapters
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.platzi.android.rickandmorty.R
-import com.platzi.android.rickandmorty.api.EpisodeServer
 import com.platzi.android.rickandmorty.databinding.ItemListEpisodeBinding
+import com.platzi.android.rickandmorty.domain.Episode
 import com.platzi.android.rickandmorty.utils.bindingInflate
 
-//TODO Paso 3: Reemplazar tipo de episodio
 class EpisodeListAdapter(
-    private val listener: (EpisodeServer) -> Unit
+    private val listener: (Episode) -> Unit
 ): RecyclerView.Adapter<EpisodeListAdapter.EpisodeListViewHolder>() {
 
-    //TODO Paso 4: Reemplazar tipo de episodio
-    private val episodeList: MutableList<EpisodeServer> = mutableListOf()
+    private val episodeList: MutableList<Episode> = mutableListOf()
 
-    //TODO Paso 5: Reemplazar tipo de episodio
-    fun updateData(newData: List<EpisodeServer>) {
+    fun updateData(newData: List<Episode>) {
         episodeList.clear()
         episodeList.addAll(newData)
         notifyDataSetChanged()
@@ -34,15 +31,12 @@ class EpisodeListAdapter(
         holder.bind(episodeList[position])
     }
 
-    //TODO Paso 6: Reemplazar tipo de episodio
     class EpisodeListViewHolder(
         private val dataBinding: ItemListEpisodeBinding,
-        private val listener: (EpisodeServer) -> Unit
+        private val listener: (Episode) -> Unit
     ): RecyclerView.ViewHolder(dataBinding.root) {
 
-        //region Public Methods
-        //TODO Paso 7: Reemplazar tipo de episodio
-        fun bind(item: EpisodeServer){
+        fun bind(item: Episode){
             dataBinding.episode = item
             itemView.setOnClickListener { listener(item) }
         }

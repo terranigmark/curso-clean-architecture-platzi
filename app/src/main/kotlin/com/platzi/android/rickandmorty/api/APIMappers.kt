@@ -1,6 +1,7 @@
 package com.platzi.android.rickandmorty.api
 
 import com.platzi.android.rickandmorty.domain.Character
+import com.platzi.android.rickandmorty.domain.Episode
 import com.platzi.android.rickandmorty.domain.Location
 import com.platzi.android.rickandmorty.domain.Origin
 
@@ -30,4 +31,7 @@ fun LocationServer.toLocationDomain() = Location(
     url
 )
 
-//TODO Paso 8: Crear mapper para cambiar de episodio del servidor a episodio de dominio
+fun EpisodeServer.toEpisodeDomain() = Episode(
+    id,
+    name
+)

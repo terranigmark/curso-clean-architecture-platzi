@@ -3,8 +3,8 @@ package com.platzi.android.rickandmorty.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.platzi.android.rickandmorty.api.EpisodeServer
 import com.platzi.android.rickandmorty.domain.Character
+import com.platzi.android.rickandmorty.domain.Episode
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation.*
 import com.platzi.android.rickandmorty.presentation.utils.Event
 import com.platzi.android.rickandmorty.usecases.GetEpisodeFromCharacterUseCase
@@ -110,8 +110,7 @@ class CharacterDetailViewModel(
 
     sealed class CharacterDetailNavigation {
         data class ShowEpisodeError(val error: Throwable) : CharacterDetailNavigation()
-        //TODO Paso 11: Reemplazar tipo de episodio
-        data class ShowEpisodeList(val episodeList: List<EpisodeServer>) : CharacterDetailNavigation()
+        data class ShowEpisodeList(val episodeList: List<Episode>) : CharacterDetailNavigation()
         object CloseActivity : CharacterDetailNavigation()
         object HideEpisodeListLoading : CharacterDetailNavigation()
         object ShowEpisodeListLoading : CharacterDetailNavigation()
