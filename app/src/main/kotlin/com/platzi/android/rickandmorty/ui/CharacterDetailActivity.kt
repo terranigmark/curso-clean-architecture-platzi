@@ -19,6 +19,8 @@ import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.Cha
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation.*
 import com.platzi.android.rickandmorty.presentation.utils.Event
 import com.platzi.android.rickandmorty.usecases.GetEpisodeFromCharacterUseCase
+import com.platzi.android.rickandmorty.usecases.GetFavoriteCharacterStatusUseCase
+import com.platzi.android.rickandmorty.usecases.UpdateFavoriteCharacterStatusUseCase
 import com.platzi.android.rickandmorty.utils.Constants
 import com.platzi.android.rickandmorty.utils.bindCircularImageUrl
 import com.platzi.android.rickandmorty.utils.getViewModel
@@ -44,21 +46,21 @@ class CharacterDetailActivity: AppCompatActivity() {
         GetEpisodeFromCharacterUseCase(episodeRequest)
     }
 
-    //TODO Paso 12: Crear la variable getFavoriteCharacterStatusUseCase de tipo GetFavoriteCharacterStatusUseCase usando la función lazy
-    //TODO Paso 12.1: Para como parámetro characterDao
+    private val getFavoriteCharacterStatusUseCase: GetFavoriteCharacterStatusUseCase by lazy {
+        GetFavoriteCharacterStatusUseCase(characterDao)
+    }
 
-    //TODO Paso 13: Crear la variable getFavoriteCharacterStatusUseCase de tipo GetFavoriteCharacterStatusUseCase usando la función lazy
-    //TODO Paso 13.1: Para como parámetro characterDao
+    private val updateFavoriteCharacterStatusUseCase: UpdateFavoriteCharacterStatusUseCase by lazy {
+        UpdateFavoriteCharacterStatusUseCase(characterDao)
+    }
 
-    //TODO Paso 14: Eliminar la variable "characterDao"
-    //TODO Paso 15: Agregar el caso de uso "getFavoriteCharacterStatusUseCase"
-    //TODO Paso 16: Agregar el caso de uso "updateFavoriteCharacterStatusUseCase"
     private val characterDetailViewModel: CharacterDetailViewModel by lazy {
         getViewModel {
             CharacterDetailViewModel(
                 intent.getParcelableExtra(Constants.EXTRA_CHARACTER),
-                characterDao,
-                getEpisodeFromCharacterUseCase
+                getEpisodeFromCharacterUseCase,
+                getFavoriteCharacterStatusUseCase,
+                updateFavoriteCharacterStatusUseCase
             )
         }
     }
