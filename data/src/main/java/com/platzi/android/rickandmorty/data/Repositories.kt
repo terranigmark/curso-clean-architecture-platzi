@@ -1,6 +1,7 @@
 package com.platzi.android.rickandmorty.data
 
 import com.platzi.android.rickandmorty.domain.Character
+import com.platzi.android.rickandmorty.domain.Episode
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
@@ -27,16 +28,14 @@ class CharacterRepository(
     //endregion
 }
 
-//TODO Paso 2: Pasar como parámetro "remoteEpisodeDataSource" de tipo RemoteEpisodeDataSource
 class EpisodeRepository(
-
+    private val remoteEpisodeDataSource: RemoteEpisodeDataSource
 ) {
 
     //region Public Methods
 
-    //TODO Paso 3: Crear método "getEpisodeFromCharacter" que retorna un objeto de tipo Single<List<Episode>>
-    //TODO Paso 3.1: Pasar como parámetro "episodeUrlList" de tipo List<String>
-    //TODO Paso 3.2: Devolver el método "getEpisodeFromCharacter" del parámetro "remoteEpisodeDataSource"
+    fun getEpisodeFromCharacter(episodeUrlList: List<String>): Single<List<Episode>> =
+        remoteEpisodeDataSource.getEpisodeFromCharacter(episodeUrlList)
 
     //endregion
 }

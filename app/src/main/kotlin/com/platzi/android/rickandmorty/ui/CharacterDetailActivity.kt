@@ -12,9 +12,8 @@ import com.platzi.android.rickandmorty.api.APIConstants.BASE_API_URL
 import com.platzi.android.rickandmorty.api.CharacterRequest
 import com.platzi.android.rickandmorty.api.CharacterRetrofitDataSource
 import com.platzi.android.rickandmorty.api.EpisodeRequest
-import com.platzi.android.rickandmorty.data.CharacterRepository
-import com.platzi.android.rickandmorty.data.LocalCharacterDataSource
-import com.platzi.android.rickandmorty.data.RemoteCharacterDataSource
+import com.platzi.android.rickandmorty.api.EpisodeRetrofitDataSource
+import com.platzi.android.rickandmorty.data.*
 import com.platzi.android.rickandmorty.database.CharacterDatabase
 import com.platzi.android.rickandmorty.database.CharacterRoomDataSource
 import com.platzi.android.rickandmorty.databinding.ActivityCharacterDetailBinding
@@ -61,15 +60,16 @@ class CharacterDetailActivity: AppCompatActivity() {
         CharacterRepository(remoteCharacterDataSource, localCharacterDataSource)
     }
 
-    //TODO Paso 8: Crear variable "remoteEpisodeDataSource" de tipo RemoteEpisodeDataSource
-    //TODO Paso 8.1: Inicializar variable con una instancia de la clase "EpisodeRetrofitDataSource"
+    private val remoteEpisodeDataSource: RemoteEpisodeDataSource by lazy {
+        EpisodeRetrofitDataSource(episodeRequest)
+    }
 
-    //TODO Paso 9: Crear variable "episodeRepository" de tipo EpisodeRepository
-    //TODO Paso 9.1: Inicializar variable con una instancia de la clase "EpisodeRepository"
+    private val episodeRepository: EpisodeRepository by lazy {
+        EpisodeRepository(remoteEpisodeDataSource)
+    }
 
-    //TODO Paso 10: Pasar como parámetro la variable "episodeRepository" en la implementación del caso de uso "getEpisodeFromCharacterUseCase"
     private val getEpisodeFromCharacterUseCase: GetEpisodeFromCharacterUseCase by lazy {
-        GetEpisodeFromCharacterUseCase(episodeRequest)
+        GetEpisodeFromCharacterUseCase(episodeRepository)
     }
 
     private val getFavoriteCharacterStatusUseCase: GetFavoriteCharacterStatusUseCase by lazy {
