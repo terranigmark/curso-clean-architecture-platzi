@@ -1,4 +1,4 @@
-package com.platzi.android.rickandmorty.database
+package com.platzi.android.rickandmorty.databasemanager
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

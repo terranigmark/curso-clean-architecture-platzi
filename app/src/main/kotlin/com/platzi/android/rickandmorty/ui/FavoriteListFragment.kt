@@ -17,8 +17,8 @@ import com.platzi.android.rickandmorty.api.CharacterRetrofitDataSource
 import com.platzi.android.rickandmorty.data.CharacterRepository
 import com.platzi.android.rickandmorty.data.LocalCharacterDataSource
 import com.platzi.android.rickandmorty.data.RemoteCharacterDataSource
-import com.platzi.android.rickandmorty.database.CharacterDatabase
-import com.platzi.android.rickandmorty.database.CharacterRoomDataSource
+import com.platzi.android.rickandmorty.databasemanager.CharacterDatabase
+import com.platzi.android.rickandmorty.databasemanager.CharacterRoomDataSource
 import com.platzi.android.rickandmorty.databinding.FragmentFavoriteListBinding
 import com.platzi.android.rickandmorty.domain.Character
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel
