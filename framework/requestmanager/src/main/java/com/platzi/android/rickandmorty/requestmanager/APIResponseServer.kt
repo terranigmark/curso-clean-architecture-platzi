@@ -1,18 +1,18 @@
-package com.platzi.android.rickandmorty.api
+package com.platzi.android.rickandmorty.requestmanager
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_EPISODE
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_GENDER
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_ID
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_IMAGE
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_LOCATION
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_NAME
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_ORIGIN
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_RESULTS
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_SPECIES
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_STATUS
-import com.platzi.android.rickandmorty.api.APIConstants.KEY_URL
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_EPISODE
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_GENDER
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_RESULTS
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_ID
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_IMAGE
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_LOCATION
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_NAME
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_ORIGIN
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_SPECIES
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_STATUS
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.KEY_URL
 import kotlinx.android.parcel.Parcelize
 
 data class CharacterResponseServer(

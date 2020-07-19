@@ -1,4 +1,4 @@
-package com.platzi.android.rickandmorty.api
+package com.platzi.android.rickandmorty.requestmanager
 
 object APIConstants {
     const val BASE_API_URL = "https://rickandmortyapi.com/api/"

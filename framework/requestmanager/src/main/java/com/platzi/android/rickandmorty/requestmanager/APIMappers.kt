@@ -1,4 +1,4 @@
-package com.platzi.android.rickandmorty.api
+package com.platzi.android.rickandmorty.requestmanager
 
 import com.platzi.android.rickandmorty.domain.Character
 import com.platzi.android.rickandmorty.domain.Episode

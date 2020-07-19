@@ -50,6 +50,7 @@ dependencies {
     implementation project(":usecases")
     implementation project(":framework:databasemanager")
     implementation project(":framework:imagemanager")
+    implementation project(":framework:requestmanager")
 
     //Kotlin
     implementation kotlinLib
@@ -62,11 +63,6 @@ dependencies {
 
     //Reactive Streams
     implementation reactiveStreamsLib
-
-    //Retrofit
-    implementation okHttpInterceptorLib
-    implementation retrofitRxJavaLib
-    implementation retrofitGsonLib
 
     //RxJava
     implementation rxAndroidLib

@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //Project
+    implementation project(":data")
+    implementation project(":domain")
+
+    //Kotlin
+    implementation kotlinLib
+
+    //RxJava
+    implementation rxAndroidLib
+    implementation rxJavaLib
+
+    //Retrofit
+    implementation okHttpInterceptorLib
+    implementation retrofitRxJavaLib
+    implementation retrofitGsonLib
+}

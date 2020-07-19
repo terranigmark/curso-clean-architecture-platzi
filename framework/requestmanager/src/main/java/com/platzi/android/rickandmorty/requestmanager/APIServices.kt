@@ -1,6 +1,6 @@
-package com.platzi.android.rickandmorty.api
+package com.platzi.android.rickandmorty.requestmanager
 
-import com.platzi.android.rickandmorty.api.APIConstants.ENDPOINT_CHARACTER
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.ENDPOINT_CHARACTER
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

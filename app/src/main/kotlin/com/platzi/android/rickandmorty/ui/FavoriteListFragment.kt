@@ -11,9 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.platzi.android.rickandmorty.R
 import com.platzi.android.rickandmorty.adapters.FavoriteListAdapter
-import com.platzi.android.rickandmorty.api.APIConstants
-import com.platzi.android.rickandmorty.api.CharacterRequest
-import com.platzi.android.rickandmorty.api.CharacterRetrofitDataSource
 import com.platzi.android.rickandmorty.data.CharacterRepository
 import com.platzi.android.rickandmorty.data.LocalCharacterDataSource
 import com.platzi.android.rickandmorty.data.RemoteCharacterDataSource
@@ -26,6 +23,9 @@ import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.Favori
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowCharacterList
 import com.platzi.android.rickandmorty.presentation.FavoriteListViewModel.FavoriteListNavigation.ShowEmptyListMessage
 import com.platzi.android.rickandmorty.presentation.utils.Event
+import com.platzi.android.rickandmorty.requestmanager.APIConstants.BASE_API_URL
+import com.platzi.android.rickandmorty.requestmanager.CharacterRequest
+import com.platzi.android.rickandmorty.requestmanager.CharacterRetrofitDataSource
 import com.platzi.android.rickandmorty.usecases.GetAllFavoriteCharactersUseCase
 import com.platzi.android.rickandmorty.utils.getViewModel
 import com.platzi.android.rickandmorty.utils.setItemDecorationSpacing
@@ -39,7 +39,7 @@ class FavoriteListFragment : Fragment() {
     private lateinit var listener: OnFavoriteListFragmentListener
 
     private val characterRequest: CharacterRequest by lazy {
-        CharacterRequest(APIConstants.BASE_API_URL)
+        CharacterRequest(BASE_API_URL)
     }
 
     private val localCharacterDataSource: LocalCharacterDataSource by lazy {

@@ -1,3 +1,4 @@
+include ':framework:requestmanager'
 include ':framework:databasemanager'
 include ':framework:imagemanager'
 include ':usecases'
