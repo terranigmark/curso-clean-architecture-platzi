@@ -55,6 +55,10 @@ dependencies {
     //Kotlin
     implementation kotlinLib
 
+    //Dagger
+    implementation daggerLib
+    kapt daggerCompiler
+
     //KTX
     implementation ktxLib
 

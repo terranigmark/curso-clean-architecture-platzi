@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -30,6 +31,10 @@ dependencies {
 
     //Kotlin
     implementation kotlinLib
+
+    //Dagger
+    implementation daggerLib
+    kapt daggerCompiler
 
     //RxJava
     implementation rxAndroidLib
