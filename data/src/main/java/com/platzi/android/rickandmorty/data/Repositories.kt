@@ -26,3 +26,17 @@ class CharacterRepository(
 
     //endregion
 }
+
+//TODO Paso 2: Pasar como parámetro "remoteEpisodeDataSource" de tipo RemoteEpisodeDataSource
+class EpisodeRepository(
+
+) {
+
+    //region Public Methods
+
+    //TODO Paso 3: Crear método "getEpisodeFromCharacter" que retorna un objeto de tipo Single<List<Episode>>
+    //TODO Paso 3.1: Pasar como parámetro "episodeUrlList" de tipo List<String>
+    //TODO Paso 3.2: Devolver el método "getEpisodeFromCharacter" del parámetro "remoteEpisodeDataSource"
+
+    //endregion
+}

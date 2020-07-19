@@ -61,6 +61,13 @@ class CharacterDetailActivity: AppCompatActivity() {
         CharacterRepository(remoteCharacterDataSource, localCharacterDataSource)
     }
 
+    //TODO Paso 8: Crear variable "remoteEpisodeDataSource" de tipo RemoteEpisodeDataSource
+    //TODO Paso 8.1: Inicializar variable con una instancia de la clase "EpisodeRetrofitDataSource"
+
+    //TODO Paso 9: Crear variable "episodeRepository" de tipo EpisodeRepository
+    //TODO Paso 9.1: Inicializar variable con una instancia de la clase "EpisodeRepository"
+
+    //TODO Paso 10: Pasar como parámetro la variable "episodeRepository" en la implementación del caso de uso "getEpisodeFromCharacterUseCase"
     private val getEpisodeFromCharacterUseCase: GetEpisodeFromCharacterUseCase by lazy {
         GetEpisodeFromCharacterUseCase(episodeRequest)
     }

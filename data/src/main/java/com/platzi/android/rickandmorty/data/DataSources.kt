@@ -17,3 +17,7 @@ interface LocalCharacterDataSource {
 
     fun updateFavoriteCharacterStatus(character: Character): Maybe<Boolean>
 }
+
+//TODO Paso 1: Crear interfaz para fuente de datos remoto de episodio (RemoteEpisodeDataSource)
+//TODO Paso 1.1: Crear método "getEpisodeFromCharacter" que retorna un objeto de tipo Single<List<Episode>>
+//TODO Paso 1.2: Pasar como parámetro "episodeUrlList" de tipo List<String>

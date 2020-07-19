@@ -19,3 +19,13 @@ class CharacterRetrofitDataSource(
             .subscribeOn(Schedulers.io())
     }
 }
+
+//TODO Paso 4: Pasar como parámetro "episodeRequest" de tipo EpisodeRequest
+//TODO Paso 4.1: Implementar la interfaz para fuente de datos remoto de episodio creada en el Paso 1
+class EpisodeRetrofitDataSource(
+    private val episodeRequest: EpisodeRequest
+) {
+
+    //TODO Paso 5: Implementar método de la interfaz para fuente de datos remoto de episodio creada en el Paso 1
+    //TODO Paso 5.1: Migrar la lógica del caso de uso "getEpisodeFromCharacterUseCase"
+}
