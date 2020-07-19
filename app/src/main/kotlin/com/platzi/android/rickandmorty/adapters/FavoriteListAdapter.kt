@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.platzi.android.rickandmorty.R
 import com.platzi.android.rickandmorty.databinding.ItemGridFavoriteCharacterBinding
 import com.platzi.android.rickandmorty.domain.Character
-import com.platzi.android.rickandmorty.utils.bindImageUrl
+import com.platzi.android.rickandmorty.imagemanager.bindImageUrl
 import com.platzi.android.rickandmorty.utils.bindingInflate
 import kotlinx.android.synthetic.main.item_grid_favorite_character.view.*
 
