@@ -1,15 +1,33 @@
 package com.platzi.android.rickandmorty.di
 
+import com.platzi.android.rickandmorty.domain.Character
+import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel
+import com.platzi.android.rickandmorty.usecases.GetEpisodeFromCharacterUseCase
+import com.platzi.android.rickandmorty.usecases.GetFavoriteCharacterStatusUseCase
+import com.platzi.android.rickandmorty.usecases.UpdateFavoriteCharacterStatusUseCase
 import dagger.Module
+import dagger.Provides
+import dagger.Subcomponent
 
-//TODO Paso 1: Pasar como parámetro "character" de tipo Character?
 @Module
 class CharacterDetailModule(
-
+    private val character: Character?
 ) {
 
-    //TODO Paso 2: Crear el método para proveer el view model "CharacterDetailViewModel"
-
+    @Provides
+    fun characterDetailViewModelProvider(
+        getEpisodeFromCharacterUseCase: GetEpisodeFromCharacterUseCase,
+        getFavoriteCharacterStatusUseCase: GetFavoriteCharacterStatusUseCase,
+        updateFavoriteCharacterStatusUseCase: UpdateFavoriteCharacterStatusUseCase
+    ) = CharacterDetailViewModel(
+        character,
+        getEpisodeFromCharacterUseCase,
+        getFavoriteCharacterStatusUseCase,
+        updateFavoriteCharacterStatusUseCase
+    )
 }
 
-//TODO Paso 3: Crear el subcomponente "CharacterDetailComponent" usando el módulo "CharacterDetailModule"
+@Subcomponent(modules = [(CharacterDetailModule::class)])
+interface CharacterDetailComponent {
+    val characterDetailViewModel: CharacterDetailViewModel
+}

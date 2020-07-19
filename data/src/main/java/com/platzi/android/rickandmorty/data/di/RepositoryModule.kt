@@ -16,5 +16,10 @@ class RepositoryModule {
         localCharacterDataSource
     )
 
-    //TODO Paso 7: Crear el método para proveer el repository "EpisodeRepository"
+    @Provides
+    fun episodeRepositoryProvider(
+        remoteEpisodeDataSource: RemoteEpisodeDataSource
+    ) = EpisodeRepository(
+        remoteEpisodeDataSource
+    )
 }

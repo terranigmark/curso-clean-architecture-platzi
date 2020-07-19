@@ -8,10 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.platzi.android.rickandmorty.R
 import com.platzi.android.rickandmorty.adapters.EpisodeListAdapter
-import com.platzi.android.rickandmorty.data.*
-import com.platzi.android.rickandmorty.databasemanager.CharacterDatabase
-import com.platzi.android.rickandmorty.databasemanager.CharacterRoomDataSource
 import com.platzi.android.rickandmorty.databinding.ActivityCharacterDetailBinding
+import com.platzi.android.rickandmorty.di.CharacterDetailComponent
+import com.platzi.android.rickandmorty.di.CharacterDetailModule
 import com.platzi.android.rickandmorty.domain.Character
 import com.platzi.android.rickandmorty.imagemanager.bindCircularImageUrl
 import com.platzi.android.rickandmorty.parcelables.CharacterParcelable
@@ -20,15 +19,8 @@ import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation
 import com.platzi.android.rickandmorty.presentation.CharacterDetailViewModel.CharacterDetailNavigation.*
 import com.platzi.android.rickandmorty.presentation.utils.Event
-import com.platzi.android.rickandmorty.requestmanager.APIConstants.BASE_API_URL
-import com.platzi.android.rickandmorty.requestmanager.CharacterRequest
-import com.platzi.android.rickandmorty.requestmanager.CharacterRetrofitDataSource
-import com.platzi.android.rickandmorty.requestmanager.EpisodeRequest
-import com.platzi.android.rickandmorty.requestmanager.EpisodeRetrofitDataSource
-import com.platzi.android.rickandmorty.usecases.GetEpisodeFromCharacterUseCase
-import com.platzi.android.rickandmorty.usecases.GetFavoriteCharacterStatusUseCase
-import com.platzi.android.rickandmorty.usecases.UpdateFavoriteCharacterStatusUseCase
 import com.platzi.android.rickandmorty.utils.Constants
+import com.platzi.android.rickandmorty.utils.app
 import com.platzi.android.rickandmorty.utils.getViewModel
 import com.platzi.android.rickandmorty.utils.showLongToast
 import kotlinx.android.synthetic.main.activity_character_detail.*
@@ -39,66 +31,10 @@ class CharacterDetailActivity: AppCompatActivity() {
 
     private lateinit var episodeListAdapter: EpisodeListAdapter
     private lateinit var binding: ActivityCharacterDetailBinding
-    //TODO Paso 11: Crear variable "characterDetailComponent" de tipo CharacterDetailComponent
+    private lateinit var characterDetailComponent: CharacterDetailComponent
 
-    //TODO Paso 12: Eliminar variable "episodeRequest"
-    private val episodeRequest: EpisodeRequest by lazy {
-        EpisodeRequest(BASE_API_URL)
-    }
-
-    //TODO Paso 13: Eliminar variable "characterRequest"
-    private val characterRequest: CharacterRequest by lazy {
-        CharacterRequest(BASE_API_URL)
-    }
-
-    //TODO Paso 14: Eliminar variable "localCharacterDataSource"
-    private val localCharacterDataSource: LocalCharacterDataSource by lazy {
-        CharacterRoomDataSource(CharacterDatabase.getDatabase(applicationContext))
-    }
-
-    //TODO Paso 15: Eliminar variable "remoteCharacterDataSource"
-    private val remoteCharacterDataSource: RemoteCharacterDataSource by lazy {
-        CharacterRetrofitDataSource(characterRequest)
-    }
-
-    //TODO Paso 16: Eliminar variable "characterRepository"
-    private val characterRepository: CharacterRepository by lazy {
-        CharacterRepository(remoteCharacterDataSource, localCharacterDataSource)
-    }
-
-    //TODO Paso 17: Eliminar variable "remoteEpisodeDataSource"
-    private val remoteEpisodeDataSource: RemoteEpisodeDataSource by lazy {
-        EpisodeRetrofitDataSource(episodeRequest)
-    }
-
-    //TODO Paso 18: Eliminar variable "episodeRepository"
-    private val episodeRepository: EpisodeRepository by lazy {
-        EpisodeRepository(remoteEpisodeDataSource)
-    }
-
-    //TODO Paso 19: Eliminar variable "getEpisodeFromCharacterUseCase"
-    private val getEpisodeFromCharacterUseCase: GetEpisodeFromCharacterUseCase by lazy {
-        GetEpisodeFromCharacterUseCase(episodeRepository)
-    }
-
-    //TODO Paso 20: Eliminar variable "getFavoriteCharacterStatusUseCase"
-    private val getFavoriteCharacterStatusUseCase: GetFavoriteCharacterStatusUseCase by lazy {
-        GetFavoriteCharacterStatusUseCase(characterRepository)
-    }
-
-    //TODO Paso 21: Eliminar variable "updateFavoriteCharacterStatusUseCase"
-    private val updateFavoriteCharacterStatusUseCase: UpdateFavoriteCharacterStatusUseCase by lazy {
-        UpdateFavoriteCharacterStatusUseCase(characterRepository)
-    }
-
-    //TODO Paso 22: Reemplazar la lógica del método "getViewModel" utilizando el componente "characterDetailComponent"
     private val characterDetailViewModel: CharacterDetailViewModel by lazy {
-        getViewModel { CharacterDetailViewModel(
-            intent.getParcelableExtra<CharacterParcelable>(Constants.EXTRA_CHARACTER)?.toCharacterDomain(),
-            getEpisodeFromCharacterUseCase,
-            getFavoriteCharacterStatusUseCase,
-            updateFavoriteCharacterStatusUseCase
-        ) }
+        getViewModel { characterDetailComponent.characterDetailViewModel }
     }
 
     //endregion
@@ -108,8 +44,9 @@ class CharacterDetailActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //TODO Paso 23: Reemplazar la lógica del método "getViewModel" utilizando el componente "characterDetailComponent"
-        //TODO Paso 23.1: Pasar como parámetro de "CharacterDetailModule" la implementación del parcelable que fue reemplazado en el Paso 21
+        characterDetailComponent = app.component.inject(CharacterDetailModule(
+            intent.getParcelableExtra<CharacterParcelable>(Constants.EXTRA_CHARACTER)?.toCharacterDomain()
+        ))
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)
         binding.lifecycleOwner = this@CharacterDetailActivity

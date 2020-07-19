@@ -30,7 +30,13 @@ class APIModule {
         characterRequest: CharacterRequest
     ): RemoteCharacterDataSource = CharacterRetrofitDataSource(characterRequest)
 
-    //TODO Paso 8: Crear el método para proveer la petición de episodio "EpisodeRequest"
+    @Provides
+    fun episodeRequestProvider(
+        @Named("baseUrl") baseUrl: String
+    ) = EpisodeRequest(baseUrl)
 
-    //TODO Paso 9: Crear el método para proveer el recurso de datos de episodio remoto "EpisodeRetrofitDataSource"
+    @Provides
+    fun remoteEpisodeDataSourceProvider(
+        episodeRequest: EpisodeRequest
+    ): RemoteEpisodeDataSource = EpisodeRetrofitDataSource(episodeRequest)
 }

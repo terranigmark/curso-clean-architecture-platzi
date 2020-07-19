@@ -1,8 +1,8 @@
 package com.platzi.android.rickandmorty.usecases.di
 
 import com.platzi.android.rickandmorty.data.CharacterRepository
-import com.platzi.android.rickandmorty.usecases.GetAllCharactersUseCase
-import com.platzi.android.rickandmorty.usecases.GetAllFavoriteCharactersUseCase
+import com.platzi.android.rickandmorty.data.EpisodeRepository
+import com.platzi.android.rickandmorty.usecases.*
 import dagger.Module
 import dagger.Provides
 
@@ -17,9 +17,15 @@ class UseCaseModule {
     fun getAllFavoriteCharactersUseCaseProvider(characterRepository: CharacterRepository) =
         GetAllFavoriteCharactersUseCase(characterRepository)
 
-    //TODO Paso 4: Crear el método para proveer el caso de uso "GetFavoriteCharacterStatusUseCase"
+    @Provides
+    fun getFavoriteCharacterStatusUseCaseProvider(characterRepository: CharacterRepository) =
+        GetFavoriteCharacterStatusUseCase(characterRepository)
 
-    //TODO Paso 5: Crear el método para proveer el caso de uso "UpdateFavoriteCharacterStatusUseCase"
+    @Provides
+    fun updateFavoriteCharacterStatusUseCaseProvider(characterRepository: CharacterRepository) =
+        UpdateFavoriteCharacterStatusUseCase(characterRepository)
 
-    //TODO Paso 6: Crear el método para proveer el caso de uso "GetEpisodeFromCharacterUseCase"
+    @Provides
+    fun getEpisodeFromCharacterUseCaseProvider(episodeRepository: EpisodeRepository) =
+        GetEpisodeFromCharacterUseCase(episodeRepository)
 }
