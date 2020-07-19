@@ -1,8 +1,6 @@
 package com.platzi.android.rickandmorty.data.di
 
-import com.platzi.android.rickandmorty.data.CharacterRepository
-import com.platzi.android.rickandmorty.data.LocalCharacterDataSource
-import com.platzi.android.rickandmorty.data.RemoteCharacterDataSource
+import com.platzi.android.rickandmorty.data.*
 import dagger.Module
 import dagger.Provides
 
@@ -17,4 +15,6 @@ class RepositoryModule {
         remoteCharacterDataSource,
         localCharacterDataSource
     )
+
+    //TODO Paso 7: Crear el método para proveer el repository "EpisodeRepository"
 }

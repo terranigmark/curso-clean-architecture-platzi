@@ -20,6 +20,7 @@ interface RickAndMortyPlatziComponent {
 
     fun inject(module: CharacterListModule): CharacterListComponent
     fun inject(module: FavoriteListModule): FavoriteListComponent
+    //TODO Paso 10: Inyectar el módulo del detalle del personaje
 
     @Component.Factory
     interface Factory {
