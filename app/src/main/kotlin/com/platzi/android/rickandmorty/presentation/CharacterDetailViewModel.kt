@@ -66,8 +66,6 @@ class CharacterDetailViewModel(
         disposable.add(
             updateFavoriteCharacterStatusUseCase
                 .invoke(characterEntity)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
                 .subscribe { isFavorite ->
                     _isFavorite.value = isFavorite
                 }
