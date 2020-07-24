@@ -12,15 +12,21 @@ Este proyecto contiene las siguientes características.
 * Una pantalla de detalle del personaje que muestra información adicional (estatus, especie, género, origen, ubicación y listado de episodios donde ha aparecido el personaje).
 * Una opción para salvar tu personaje favorito.
 
+## Animación
+
+<p align="center">
+  <img width="324" height="666" src="screenshots/rickandmorty.gif">
+</p>
+
 ## Capturas de pantalla
 
 <p align="center">
-  <img width="432" height="888" src="screenshots/screenshot_1.png">
-  <img width="432" height="888" src="screenshots/screenshot_2.png">
+  <img width="324" height="666" src="screenshots/screenshot_1.png">
+  <img width="324" height="666" src="screenshots/screenshot_2.png">
 </p>
 <p align="center">
-  <img width="432" height="888" src="screenshots/screenshot_3.png">
-  <img width="432" height="888" src="screenshots/screenshot_4.png">
+  <img width="324" height="666" src="screenshots/screenshot_3.png">
+  <img width="324" height="666" src="screenshots/screenshot_4.png">
 </p>
 
 ## Guía de implementación
