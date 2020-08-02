@@ -17,8 +17,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 //TODO Paso 7: Eliminar variable "characterDao" de tipo CharacterDao
-//TODO Paso 8: Eliminar variable "getFavoriteCharacterStatusUseCase" de tipo GetFavoriteCharacterStatusUseCase
-//TODO Paso 9: Eliminar variable "updateFavoriteCharacterStatusUseCase" de tipo UpdateFavoriteCharacterStatusUseCase
+//TODO Paso 8: Agregar variable "getFavoriteCharacterStatusUseCase" de tipo GetFavoriteCharacterStatusUseCase
+//TODO Paso 9: Agregar variable "updateFavoriteCharacterStatusUseCase" de tipo UpdateFavoriteCharacterStatusUseCase
 class CharacterDetailViewModel(
     private val character: CharacterServer? = null,
     private val characterDao: CharacterDao,
